@@ -43,7 +43,7 @@ for row = 1:h
             g = linsolve(scriptI * scriptV, scriptI * i);
             norm_g = norm(g);
             albedo_xy = norm_g;
-            normal_xy = g / norm_g;
+            normal_xy = g / norm_g;            
         end
         
         albedo(row,col) = albedo_xy;

@@ -4,7 +4,7 @@ function [ p, q, SE ] = check_integrability( normals )
 %   p : df / dx
 %   q : df / dy
 %   SE : Squared Errors of the 2 second derivatives
-
+disp(size(normals));
 % initalization
 p = zeros(size(normals));
 q = zeros(size(normals));
@@ -38,8 +38,8 @@ q_zero = [q, zeros(size(q, 1), 1)];
 dp_dy = diff(p_zero, 1, 1);
 dq_dx = diff(q_zero, 1, 2);
 
-% [~, dp_dy] = imgradient(p)
-% [dq_dx, ~] = imgradient(q)
+%[~, dp_dy] = imgradient(p);
+%[dq_dx, ~] = imgradient(q);
 
 SE = (dp_dy - dq_dx) .^ 2;
 % ========================================================================
