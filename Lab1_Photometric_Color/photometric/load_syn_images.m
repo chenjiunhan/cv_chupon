@@ -12,7 +12,7 @@ nfiles = length(files);
 if nargin == 1
     channel = 1;
 end
-
+ 
 image_stack = 0;
 V = 0;
 Z = 0.5;

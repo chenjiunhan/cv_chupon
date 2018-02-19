@@ -33,8 +33,7 @@ height_map = construct_surface( p, q );
 show_results(albedo, normals, SE);
 show_model(albedo, height_map);
 %% 
-%image_dir = './SphereColor/';
-image_dir = './MonkeyColor/';
+image_dir = './SphereColor/';
 
 [image_stack1, scriptV1] = load_syn_images(image_dir, 1);
 [image_stack2, scriptV2] = load_syn_images(image_dir, 2);
@@ -48,13 +47,8 @@ disp('Computing surface albedo and normal map...')
 [albedo1, normals1] = estimate_alb_nrm(image_stack1, scriptV1);
 [albedo2, normals2] = estimate_alb_nrm(image_stack2, scriptV2);
 [albedo3, normals3] = estimate_alb_nrm(image_stack3, scriptV3);
-normals = (normals1 + normals2 + normals3) ./ sqrt(normals1 .* normals1 + normals2 .* normals2 + normals3 .* normals3);
-[albedo_h, albedo_w] = size(albedo1);
-albedo = zeros(albedo_h,albedo_w,3);
-albedo(:,:,1) = albedo1;
-albedo(:,:,2) = albedo2;
-albedo(:,:,3) = albedo3;
-
+normals = (normals1 + normals2 + normals3) / 3;
+albedo = zeros(size()
 %% integrability check: is (dp / dy  -  dq / dx) ^ 2 small everywhere?
 disp('Integrability checking')
 [p, q, SE] = check_integrability(normals);

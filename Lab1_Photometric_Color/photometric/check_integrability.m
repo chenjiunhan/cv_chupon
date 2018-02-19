@@ -38,8 +38,13 @@ q_zero = [q, zeros(size(q, 1), 1)];
 dp_dy = diff(p_zero, 1, 1);
 dq_dx = diff(q_zero, 1, 2);
 
-%[~, dp_dy] = imgradient(p);
-%[dq_dx, ~] = imgradient(q);
+p_zero_2 = [zeros(1, size(p, 2)); p];
+q_zero_2 = [zeros(size(q, 1), 1), q];
+dp_dy_2 = diff(p_zero_2, 1, 1);
+dq_dx_2 = diff(q_zero_2, 1, 2);
+
+dp_dy = (dp_dy + dp_dy_2) / 2;
+dq_dx = (dq_dx + dq_dx_2) / 2;
 
 SE = (dp_dy - dq_dx) .^ 2;
 % ========================================================================

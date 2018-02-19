@@ -37,15 +37,21 @@ for row = 1:h
         
         if all(i(:) == 0)
             albedo_xy = 0;
-            normal_xy = 0;
-        else
+            normal_xy = zeros(3, 1);
+        else            
             scriptI = diag(i);
             g = linsolve(scriptI * scriptV, scriptI * i);
             norm_g = norm(g);
-            albedo_xy = norm_g;
-            normal_xy = g / norm_g;            
+                        
+            if norm_g == 0 || sum(isnan(g)) > 0 || isnan(norm_g)
+                albedo_xy = 0;
+                normal_xy = zeros(3, 1);                
+            else
+                albedo_xy = norm_g;
+                normal_xy = g / norm_g;                
+            end                        
         end
-        
+               
         albedo(row,col) = albedo_xy;
         normal(row,col,:) = normal_xy;
     end

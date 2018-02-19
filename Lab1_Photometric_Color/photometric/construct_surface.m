@@ -53,8 +53,31 @@ switch path_type
         
         % =================================================================
         % YOUR CODE GOES HERE
-
+        height_map_row = zeros(h, w);
+        height_map_col = zeros(h, w);
         
+        height_map_col(1, 1) = 0;
+        for row = 2:h
+            height_map_col(row, 1) = height_map_col(row - 1, 1) + q(row, 1);
+        end
+        % for each row
+        %   for each element of the row except for leftmost
+        %       height_value = previous_height_value + corresponding_p_value
+        
+        for col = 2:w
+            height_map_col(:, col) = height_map_col(:, col - 1) + p(:, col);
+        end
+        
+        height_map_row(1, 1) = 0;
+        for col = 2:w
+            height_map_row(1, col) = height_map_row(1, col - 1) + p(1, col);
+        end
+        
+        for row = 2:h
+            height_map_row(row, :) = height_map_row(row - 1, :) + q(row, :);
+        end
+        
+        height_map = 0.3 * height_map_row + 0.7 * height_map_col;
         % =================================================================
 end
 
